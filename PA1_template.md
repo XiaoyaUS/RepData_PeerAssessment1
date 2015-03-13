@@ -4,6 +4,8 @@ Xiaoya Zhu
 
 
 
+
+
 ## Set global options and load library
 
 
@@ -32,7 +34,7 @@ library(dplyr)
 ```
 
 ```r
-opts_chunk$set(echo = TRUE)
+opts_chunk$set(echo = TRUE, PATH="./figure/")
 ```
 
 ## Loading and preprocessing the data
@@ -80,7 +82,7 @@ total_steps_per_day <- aggregate(steps~date, data, sum, na.action = na.omit)$ste
 hist(total_steps_per_day)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/histogram_totalsteps_perday-1.png) 
 
 3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -118,7 +120,7 @@ average_steps_by_interval <- aggregate(steps ~ interval, data, mean, na.action =
 plot(average_steps_by_interval, type = "l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+![](PA1_template_files/figure-html/averagesteps_byinterval-1.png) 
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -189,7 +191,7 @@ filleddata_totalsteps_per_day <- aggregate(steps~date, filleddata, sum)$steps
 hist(filleddata_totalsteps_per_day)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+![](PA1_template_files/figure-html/histogram_estimate_totalsteps_perday-1.png) 
   
   5. Calculate and report the mean and median total number of steps taken per day
 
@@ -256,7 +258,7 @@ xyplot(
 )
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-19-1.png) 
+![](PA1_template_files/figure-html/estimate_averagesteps_byinterval_perweekday-1.png) 
 
 
 

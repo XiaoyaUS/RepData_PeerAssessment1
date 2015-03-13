@@ -9,6 +9,8 @@ output:
 ---
 
 
+
+
 ## Set global options and load library
 
 ```{r setoptions, echo = TRUE}
@@ -16,7 +18,7 @@ library(knitr)
 library(lattice)
 library(lubridate)
 library(dplyr)
-opts_chunk$set(echo = TRUE)
+opts_chunk$set(echo = TRUE, PATH="./figure/")
 ```
 
 ## Loading and preprocessing the data
@@ -43,7 +45,7 @@ data_clean <- filter(data, !is.na(steps))
 total_steps_per_day <- aggregate(steps~date, data, sum, na.action = na.omit)$steps
 ```
 2.  Make a histogram of the total number of steps taken each day
-```{r}
+```{r histogram_totalsteps_perday}
 hist(total_steps_per_day)
 ```
 
@@ -66,7 +68,7 @@ median_totalsteps_perday
 ## What is the average daily activity pattern?
 
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
-```{r}
+```{r averagesteps_byinterval }
 average_steps_by_interval <- aggregate(steps ~ interval, data, mean, na.action = na.omit)
 plot(average_steps_by_interval, type = "l")
 ```
@@ -101,7 +103,7 @@ sort_filleddata <- filleddata[order(filleddata$date, filleddata$interval),]
 head(sort_filleddata)
 ```
   4. Make a histogram of the total number of steps taken each day.
-```{r}
+```{r histogram_estimate_totalsteps_perday} 
 filleddata_totalsteps_per_day <- aggregate(steps~date, filleddata, sum)$steps
 hist(filleddata_totalsteps_per_day)
 ```
@@ -138,7 +140,7 @@ filleddata[filleddata$wday %in% 2:6, 4] <- "weekday"
 filleddata$wday <- factor(filleddata$wday)
 ```
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
-```{r}
+```{r estimate_averagesteps_byinterval_perweekday}
 filleddata_by_interval_wday <- group_by(filleddata, interval, wday)
 summary_filleddata_by_interval_wday <- summarise(filleddata_by_interval_wday,mean=mean(steps))
 xyplot(
